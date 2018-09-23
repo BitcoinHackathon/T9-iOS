@@ -11,28 +11,17 @@ import BitcoinKit
 
 class SendUtility {
         
-    static func customTransactionBuild(to: (address: Address, amount: UInt64), change: (address: Address, amount: UInt64), utxos: [UnspentTransaction]) throws -> UnsignedTransaction {
-        let lockScriptTo = try! Script()
-            .append(.OP_DUP)
-            .append(.OP_HASH160)
-            .appendData(to.address.data)
-            .append(.OP_EQUALVERIFY)
-            .append(.OP_CHECKSIG)
-        
+    static func customTransactionBuild(param: (contentID: String, uid: String), to: (address: Address, amount: UInt64), change: (address: Address, amount: UInt64), utxos: [UnspentTransaction]) throws -> UnsignedTransaction {
         let lockScriptChange = Script(address: change.address)!
-        
+        let message = "contentID:\(param.contentID),uid:\(param.uid)".data(using: .utf8) ?? Data()
         let opReturnScript = try! Script()
             .append(.OP_RETURN)
-            .appendData("Hello Bitcoin".data(using: .utf8)!)
+            .appendData(message)
         let opReturnOutput = TransactionOutput(value: to.amount,
                                                lockingScript: opReturnScript.data)
 
-//        let toOutput = TransactionOutput(value: to.amount, lockingScript: lockScriptTo.data)
         let changeOutput = TransactionOutput(value: change.amount, lockingScript: lockScriptChange.data)
-        
-//        let outputs = [toOutput, changeOutput]
         let outputs = [opReturnOutput, changeOutput]
-//        let outputs = [toOutput, changeOutput, opReturnOutput]
 
         let unsignedInputs = utxos.map { TransactionInput(previousOutput: $0.outpoint, signatureScript: Data(), sequence: UInt32.max) }
         let tx = Transaction(version: 1, inputs: unsignedInputs, outputs: outputs, lockTime: 0)

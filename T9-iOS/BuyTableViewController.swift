@@ -30,7 +30,7 @@ class BuyTableViewController: UITableViewController, UITextFieldDelegate {
             buyContentsViews[i].contentsID = i.description
             btc?.checkAuth(contentsID: i.description, responseHandler: { (auth) in
                 print("\(i) \(auth)")
-                buyContentsViews[i].isPurchased = auth
+                self.buyContentsViews[i].isPurchased = auth
             })
         }
 

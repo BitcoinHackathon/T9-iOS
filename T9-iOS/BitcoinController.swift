@@ -46,7 +46,7 @@ class BitcoinController {
     }
     
     
-    /// TODO: Transaction.inputからOP_RETURNの値を取得できなかったためダミー機能
+    // TODO: Transaction.inputからOP_RETURNの値を取得できなかったためダミー機能
     func dummyAuth(contentsID: String, responseHandler: @escaping (Bool) -> ()) {
         APIClient().getTransaction(withAddresses: address) { (transactions) in
             var txidList = [Data?]()
@@ -70,6 +70,9 @@ class BitcoinController {
         }
     }
     
+    
+    private let dummyContentID = "0"
+    private let dummyUID = "abc123"
     func send(_ toAddress: String, _ amount: UInt64, completion: ((String?) -> Void)?) {
         do {
             let address = try AddressFactory.create(toAddress)
@@ -80,8 +83,10 @@ class BitcoinController {
             let (utxosToSpend, fee) = try StandardUtxoSelector().select(from: utxos, targetValue: amount)
             let totalAmount: UInt64 = utxosToSpend.reduce(UInt64()) { $0 + $1.output.value }
             let change: UInt64 = totalAmount - amount - fee
-            
-            let unsignedTx = try SendUtility.customTransactionBuild(to: (address, amount), change: (wallet.address, change), utxos: utxosToSpend)
+            let unsignedTx = try SendUtility.customTransactionBuild(param: (dummyContentID, dummyUID),
+                                                                    to: (address, amount),
+                                                                    change: (wallet.address, change),
+                                                                    utxos: utxosToSpend)
             let signedTx = try SendUtility.customTransactionSign(unsignedTx, with: [wallet.privateKey])
             
             let rawtx = signedTx.serialized().hex
