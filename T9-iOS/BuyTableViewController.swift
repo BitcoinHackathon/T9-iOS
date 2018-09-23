@@ -8,24 +8,38 @@
 
 import UIKit
 
-class BuyTableViewController: UITableViewController {
+class BuyTableViewController: UITableViewController, UITextFieldDelegate {
 
     var selectedImage:UIImage?
-    @IBOutlet var buyContentsViews: [BuyContentsView]!
+    var btc:BitcoinController?
     
+    @IBOutlet var buyContentsViews: [BuyContentsView]!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        buyContentsViews[0].isPurchased = false
-        buyContentsViews[1].isPurchased = true
-        buyContentsViews[2].isPurchased = true
-        buyContentsViews[3].isPurchased = true
 
         buyContentsViews[0].setImage(name: "image0")
         buyContentsViews[1].setImage(name: "image1")
         buyContentsViews[2].setImage(name: "image2")
         buyContentsViews[3].setImage(name: "image3")
 
+        btc = BitcoinController()
+        btc?.initalize()
+
+        for i in 0..<buyContentsViews.count {
+            buyContentsViews[i].contentsID = i.description
+            btc?.checkAuth(contentsID: i.description, responseHandler: { (auth) in
+                print("\(i) \(auth)")
+                buyContentsViews[i].isPurchased = auth
+            })
+        }
+
+//        for i in 0..<10 {
+//            btc?.checkAuth(contentsID: i.description, responseHandler: { (auth) in
+//                print("\(i) \(auth)")
+//            })
+//        }
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -56,32 +70,13 @@ class BuyTableViewController: UITableViewController {
             selectedImage = buyContentsViews[indexPath.row].imageView.image
             performSegue(withIdentifier: "toContentsViewController",sender: nil)
         } else {
-            let alertController = UIAlertController(title: "購入",message: "購入しますか？", preferredStyle: UIAlertControllerStyle.alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default){ (action: UIAlertAction) in
+            let alertController = UIAlertController(title: "",message: "譲渡されてません", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "閉じる", style: UIAlertActionStyle.default){ (action: UIAlertAction) in
             }
-            let cancelButton = UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.cancel, handler: nil)
+            //let cancelButton = UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.cancel, handler: nil)
             alertController.addAction(okAction)
-            alertController.addAction(cancelButton)
+            //alertController.addAction(cancelButton)
             present(alertController,animated: true,completion: nil)
-            
-//            let alertController = UIAlertController(title: "販売", message: "", preferredStyle: .alert)
-//            let searchAction = UIAlertAction(title: NSLocalizedString("Search for an image", comment: "search action"), style: .default, handler: {(action: UIAlertAction) -> Void in
-//                //Add your code
-//            })
-//            let choosePhotoAction = UIAlertAction(title: NSLocalizedString("Choose Photo", comment: "choosePhoto action"), style: .default, handler: {(action: UIAlertAction) -> Void in
-//                //Your code
-//            })
-//            let takePhotoAction = UIAlertAction(title: NSLocalizedString("Take Photo", comment: "takePhoto action"), style: .default, handler: {(action: UIAlertAction) -> Void in
-//                //Your code
-//            })
-//            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "cancel action"), style: .default, handler: {(action: UIAlertAction) -> Void in
-//                print("cancel action")
-//            })
-//            alertController.addAction(searchAction)
-//            alertController.addAction(choosePhotoAction)
-//            alertController.addAction(takePhotoAction)
-//            alertController.addAction(cancelAction)
-//            self.present(alertController, animated: true, completion: nil)
         }
     }
     
