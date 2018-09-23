@@ -11,6 +11,7 @@ import UIKit
 @IBDesignable class BuyContentsView: UIView {
     
     var isPurchased:Bool = false
+    var contentsID:String = ""
     @IBOutlet weak var contentsName: UILabel!
     @IBOutlet weak var purchasedLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!

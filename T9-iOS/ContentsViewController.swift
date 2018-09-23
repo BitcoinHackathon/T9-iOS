@@ -13,6 +13,7 @@ class ContentsViewController: UIViewController {
     var contentsImage:UIImage?
     @IBOutlet weak var contentsImageView: UIImageView!
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var addressTextField: UITextField!
     
     
     override func viewDidLoad() {
@@ -29,6 +30,16 @@ class ContentsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        addressTextField.text = textField.text
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     /*

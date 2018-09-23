@@ -27,7 +27,7 @@
             </objects>
             <point key="canvasLocation" x="878" y="500"/>
         </scene>
-        <!--コンテンツを買う-->
+        <!--コンテンツ-->
         <scene sceneID="cZt-FA-rlD">
             <objects>
                 <tableViewController id="nHY-iu-NSy" customClass="BuyTableViewController" customModule="T9_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -106,7 +106,7 @@
                             <outlet property="delegate" destination="nHY-iu-NSy" id="8OP-a4-LpJ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="コンテンツを買う" id="WgJ-EQ-OCi"/>
+                    <navigationItem key="navigationItem" title="コンテンツ" id="WgJ-EQ-OCi"/>
                     <connections>
                         <outletCollection property="buyContentsViews" destination="cDI-nz-i29" collectionClass="NSMutableArray" id="jLV-MQ-fhj"/>
                         <outletCollection property="buyContentsViews" destination="V6F-4d-qZQ" collectionClass="NSMutableArray" id="SzO-Cv-GmA"/>
@@ -127,25 +127,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2q-8h-lcF">
-                                <rect key="frame" x="27" y="211" width="320" height="244"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2q-8h-lcF">
+                                <rect key="frame" x="27" y="71" width="320" height="244"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="譲り先" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ur2-Aa-hiM">
-                                <rect key="frame" x="41" y="549" width="52" height="21"/>
+                                <rect key="frame" x="34" y="356" width="52" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QO0-Ii-flL">
-                                <rect key="frame" x="111" y="544" width="236" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QO0-Ii-flL">
+                                <rect key="frame" x="104" y="351" width="236" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TNo-WR-lRz">
-                                <rect key="frame" x="107" y="598" width="160" height="49"/>
+                                <rect key="frame" x="100" y="405" width="160" height="49"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="譲る"/>
@@ -155,13 +156,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="w2q-8h-lcF" firstAttribute="centerX" secondItem="3Z6-XT-JRl" secondAttribute="centerX" id="C5m-fe-kjy"/>
-                            <constraint firstItem="w2q-8h-lcF" firstAttribute="centerY" secondItem="3Z6-XT-JRl" secondAttribute="centerY" id="RmW-qP-84u"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Kdi-EU-qcx"/>
                     </view>
                     <connections>
+                        <outlet property="addressTextField" destination="QO0-Ii-flL" id="zAT-oV-SqY"/>
                         <outlet property="button" destination="TNo-WR-lRz" id="DgR-HE-PeO"/>
                         <outlet property="contentsImageView" destination="w2q-8h-lcF" id="gei-O5-QLV"/>
                     </connections>
