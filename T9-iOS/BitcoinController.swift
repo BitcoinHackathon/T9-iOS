@@ -12,16 +12,25 @@ import BitcoinKit
 class BitcoinController {
     
     private var wallet: Wallet? = Wallet()
+    var balance: UInt64 {
+        return wallet?.balance() ?? 0
+    }
     
-    func initalize() {
+    var address: String {
+        return wallet?.address.cashaddr ?? ""
+    }
+    
+    func initalize(_ completion: ((UInt64) -> ())? = nil) {
         if wallet == nil {
             let privateKey = PrivateKey(network: .testnet)
             wallet = Wallet(privateKey: privateKey)
             wallet?.save()
         }
+        reload(completion)
     }
     
     func reload(_ completion: ((UInt64) -> ())?) {
+        wallet?.reloadTransactions()
         wallet?.reloadBalance(completion: { [unowned self] (utxos) in
             print("🎉 ADDR : ", self.wallet?.address.cashaddr ?? "")
             if let balance = self.wallet?.balance() {
@@ -32,21 +41,25 @@ class BitcoinController {
         })
     }
     
-    func checkAuth(contentsID: String, responseHandler: (Bool) -> ()) {
-        return responseHandler(Int(contentsID) ?? 0 % 2 == 0)
+    func checkAuth(contentsID: String, responseHandler: @escaping (Bool) -> ()) {
+        dummyAuth(contentsID: contentsID, responseHandler: responseHandler)
     }
     
-    func messages(_ outputs: [TransactionOutput]) -> [String] {
-        let messagesSubstring: [Substring] = outputs
-            .map { $0.scriptCode().hex }
-            .filter { $0.prefix(2) == "6a" }
-            .map { $0[$0.index($0.startIndex, offsetBy: 4)...]}
-        
-        let messages = messagesSubstring
-            .map { Data(hex: String($0))! }
-            .map { String(data: $0, encoding: .utf8)! }
-        
-        return messages
+    
+    /// TODO: Transaction.inputからOP_RETURNの値を取得できなかったためダミー機能
+    func dummyAuth(contentsID: String, responseHandler: @escaping (Bool) -> ()) {
+        APIClient().getTransaction(withAddresses: address) { (transactions) in
+            var txidList = [Data?]()
+            txidList = transactions.map { $0.txid.data(using: .utf8) } // ほんとはこれをURL Bodyに入れる
+            print(txidList)
+            if let url = URL(string: "https://totemonagaiurl/checkauth") {
+                URLSession.shared.dataTask(with: url) { (data, res, error) in
+                    return responseHandler(Int(contentsID) ?? 0 % 2 == 0)
+                    }.resume()
+            } else {
+                return responseHandler(Int(contentsID) ?? 0 % 2 == 0)
+            }
+        }
     }
 
     func buy(_ toAddress: String, _ amount: UInt64, completion: ((String?) -> Void)?) {

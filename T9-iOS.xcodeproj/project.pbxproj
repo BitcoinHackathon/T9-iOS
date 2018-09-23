@@ -12,7 +12,6 @@
 		69D9D1132157414200655A28 /* BuyContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D9D10F2157414200655A28 /* BuyContentsView.swift */; };
 		69D9D1142157414200655A28 /* ContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D9D1102157414200655A28 /* ContentsViewController.swift */; };
 		C5440C3D2156250F004B5903 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5440C3C2156250F004B5903 /* AppDelegate.swift */; };
-		C5440C3F2156250F004B5903 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5440C3E2156250F004B5903 /* ViewController.swift */; };
 		C5440C422156250F004B5903 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5440C402156250F004B5903 /* Main.storyboard */; };
 		C5440C4421562510004B5903 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5440C4321562510004B5903 /* Assets.xcassets */; };
 		C5440C4721562510004B5903 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5440C4521562510004B5903 /* LaunchScreen.storyboard */; };
@@ -20,6 +19,7 @@
 		C5440C5421567CE2004B5903 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5440C5221567CE2004B5903 /* Extension.swift */; };
 		C5440C5521567CE2004B5903 /* SendUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5440C5321567CE2004B5903 /* SendUtility.swift */; };
 		C5440C5721569F7F004B5903 /* BitcoinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5440C5621569F7F004B5903 /* BitcoinController.swift */; };
+		C556CDFF2157345B0074604D /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C556CDFE2157345B0074604D /* APIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,6 @@
 		69D9D1102157414200655A28 /* ContentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentsViewController.swift; sourceTree = "<group>"; };
 		C5440C392156250F004B5903 /* T9-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "T9-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5440C3C2156250F004B5903 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C5440C3E2156250F004B5903 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C5440C412156250F004B5903 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C5440C4321562510004B5903 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5440C4621562510004B5903 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -38,6 +37,7 @@
 		C5440C5221567CE2004B5903 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		C5440C5321567CE2004B5903 /* SendUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendUtility.swift; sourceTree = "<group>"; };
 		C5440C5621569F7F004B5903 /* BitcoinController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinController.swift; sourceTree = "<group>"; };
+		C556CDFE2157345B0074604D /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +77,9 @@
 				69D9D10E2157414100655A28 /* BuyTableViewController.swift */,
 				69D9D1102157414200655A28 /* ContentsViewController.swift */,
 				C5440C3C2156250F004B5903 /* AppDelegate.swift */,
-				C5440C3E2156250F004B5903 /* ViewController.swift */,
 				C5440C5221567CE2004B5903 /* Extension.swift */,
 				C5440C5321567CE2004B5903 /* SendUtility.swift */,
+				C556CDFE2157345B0074604D /* APIClient.swift */,
 				C5440C402156250F004B5903 /* Main.storyboard */,
 				C5440C4321562510004B5903 /* Assets.xcassets */,
 				C5440C4521562510004B5903 /* LaunchScreen.storyboard */,
@@ -189,13 +189,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5440C5421567CE2004B5903 /* Extension.swift in Sources */,
-				C5440C3F2156250F004B5903 /* ViewController.swift in Sources */,
 				69D9D1132157414200655A28 /* BuyContentsView.swift in Sources */,
 				69D9D1122157414200655A28 /* BuyTableViewController.swift in Sources */,
 				69D9D1142157414200655A28 /* ContentsViewController.swift in Sources */,
 				C5440C5521567CE2004B5903 /* SendUtility.swift in Sources */,
 				C5440C5721569F7F004B5903 /* BitcoinController.swift in Sources */,
 				C5440C3D2156250F004B5903 /* AppDelegate.swift in Sources */,
+				C556CDFF2157345B0074604D /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
